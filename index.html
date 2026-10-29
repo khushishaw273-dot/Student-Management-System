@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Management System</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 30px 15px;
+      font-family: Arial, sans-serif;
+      background: #f1f5f9;
+      color: #1e293b;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 25px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px #00000010;
+    }
+
+    h1 {
+      color: #2563eb;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: #64748b;
+      margin-bottom: 25px;
+    }
+
+    h2 {
+      margin-top: 25px;
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 15px;
+    }
+
+    input {
+      border: 1px solid #cbd5e1;
+    }
+
+    button {
+      border: none;
+      background: #2563eb;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin-top: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #e2e8f0;
+      text-align: left;
+    }
+
+    th {
+      background: #eff6ff;
+    }
+
+    #message {
+      margin-top: 15px;
+      overflow-wrap: anywhere;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <h1>Student Management System</h1>
+    <p class="subtitle">
+      Register students and manage their academic information.
+    </p>
+
+    <h2>Add a Student</h2>
+
+    <form id="studentForm">
+      <input id="name" type="text"
+        placeholder="Student Name" required>
+
+      <input id="roll" type="text"
+        placeholder="Roll Number" required>
+
+      <input id="department" type="text"
+        placeholder="Department" required>
+
+      <input id="semester" type="number"
+        placeholder="Semester" min="1" max="12" required>
+
+      <input id="marks" type="number"
+        placeholder="Marks (optional)" min="0" max="100" step="0.01">
+
+      <button type="submit">Add Student</button>
+    </form>
+
+    <p id="message" role="status">
+      Website created. Database connection is the next step.
+    </p>
+
+    <h2>Student Records</h2>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Roll Number</th>
+            <th>Department</th>
+            <th>Semester</th>
+            <th>Marks</th>
+          </tr>
+        </thead>
+
+        <tbody id="studentRows">
+          <tr>
+            <td colspan="5">Database connection not configured yet.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</body>
+</html>
