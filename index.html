@@ -160,8 +160,72 @@ const supabaseClient = window.supabase.createClient(
     SUPABASE_URL,
     SUPABASE_KEY
 );
+const studentForm = document.getElementById("studentForm");
+const message = document.getElementById("message");
+const studentRows = document.getElementById("studentRows");
 
-console.log("Supabase Connected Successfully!");
+async function loadStudents() {
+    const { data, error } = await supabaseClient
+        .from("students")
+        .select("*")
+        .order("id", { ascending: true });
+
+    if (error) {
+        message.textContent = error.message;
+        return;
+    }
+
+    studentRows.innerHTML = "";
+
+    data.forEach(student => {
+        const row = document.createElement("tr");
+
+        [
+            student.name,
+            student.roll_number,
+            student.department,
+            student.semester,
+            student.marks ?? ""
+        ].forEach(value => {
+            const cell = document.createElement("td");
+            cell.textContent = value;
+            row.appendChild(cell);
+        });
+
+        studentRows.appendChild(row);
+    });
+}
+
+studentForm.addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    const student = {
+        name: document.getElementById("name").value,
+        roll_number: document.getElementById("roll").value,
+        department: document.getElementById("department").value,
+        semester: Number(document.getElementById("semester").value),
+        marks: document.getElementById("marks").value === ""
+            ? null
+            : Number(document.getElementById("marks").value)
+    };
+
+    const { error } = await supabaseClient
+        .from("students")
+        .insert([student]);
+
+    if (error) {
+        message.textContent = error.message;
+        return;
+    }
+
+    message.textContent = "Student added successfully!";
+    studentForm.reset();
+    loadStudents();
+});
+
+loadStudents();
+
+  console.log("Supabase Connected Successfully!");
 </script>
 </body>
 </html>
